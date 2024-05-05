@@ -20,9 +20,10 @@ import {
   signoutSuccess
 } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export default function DashProfile() {
-  const { currentUser,error } = useSelector((state) => state.user);
+  const { currentUser,error, loading } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setimageFileUploadProgress] = useState(null);
@@ -226,9 +227,18 @@ export default function DashProfile() {
           placeholder="password"
           onChange={handleChange}
         />
-        <Button type="submit" gradientDuoTone="purpleToBlue" outline>
-          Update
+        <Button type="submit" gradientDuoTone="purpleToBlue" outline disabled={loading || imageFileUploading}>
+          {loading ? 'Loading...' : 'Update'}
         </Button>
+        { 
+          currentUser.isAdmin && (
+            <Link to={'/create-post'}>
+           <Button gradientDuoTone='purpleToPink' className="w-full">
+             Create a Post
+           </Button>
+            </Link>
+          )
+        }
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span onClick={() => setShowModal(true)} className="cursor-pointer">
