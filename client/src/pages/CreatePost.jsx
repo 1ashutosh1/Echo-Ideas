@@ -15,6 +15,7 @@ import 'react-quill/dist/quill.snow.css';
           <option value="sports">Sports</option>
           <option value="business">Business</option>
           <option value="politics">Politics</option>
+          <option value="other">Other</option>
          </Select>
         </div>
         <div className="flex gap-4 items-center justify-between border-4 border-teal-500 border-dotted p-3">
