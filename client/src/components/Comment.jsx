@@ -92,6 +92,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
             <p className="text-gray-500 mb-2">{comment.content}</p>
             <div className="flex items-center pt-2 text-xs border-t dark:border-gray-700 max-w-fit gap-2">
               <button
+                type="button"
                 className={`text-gray-400 hover:text-blue-500 ${
                   currentUser &&
                   comment.likes.includes(currentUser._id) &&
@@ -104,10 +105,10 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
               <p className="text-gray-400">
                 {
                   // eslint-disable-next-line react/prop-types
-                  comment.numberOfLikes > 0 &&
-                    comment.numberOfLikes +
+                  comment.numberofLikes > 0 &&
+                    comment.numberofLikes +
                       " " +
-                      (comment.numberOfLikes === 1 ? "like" : "likes")
+                      (comment.numberofLikes === 1 ? "like" : "likes")
                 }
               </p>
               {

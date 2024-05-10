@@ -86,7 +86,7 @@ export default function DashComments() {
                   <Table.Cell>
                    {comment.content}
                   </Table.Cell>
-                  <Table.Cell>{comment.numberOfLikes}</Table.Cell>
+                  <Table.Cell>{comment.numberofLikes}</Table.Cell>
                   <Table.Cell>{comment.postId}</Table.Cell>
                   <Table.Cell>
                    {comment.userId}

@@ -75,9 +75,9 @@ export default function CommentSection({ postId }) {
           comment._id === commentId ? {
             ...comment,
             likes: data.likes,
-            numberOfLikes: data.likes.length,
+            numberofLikes: data.likes.length,
           } : comment
-         ))
+         ));
       }
     } catch (error) {
       console.log(error.message);
