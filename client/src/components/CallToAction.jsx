@@ -15,8 +15,8 @@ export default function CallToAction() {
         <p className="text-gray-500 my-2">Becoming an admin unlocks many features like you can write your own posts, see the statistics about those posts, delete your posts and comments, etc. </p>
         <Button gradientDuoTone='purpleToPink' onClick={handleClick} className="mt-3">Request</Button>
       </div>
-      <div className="p-7 flex-1">
-        <img src="https://www.shutterstock.com/image-vector/notification-lock-password-on-screen-600nw-1252573717.jpg" className="w-64 rounded-lg" />
+      <div className="flex-1 p-7">
+        <img src="https://www.shutterstock.com/image-vector/notification-lock-password-on-screen-600nw-1252573717.jpg" className="w-72 rounded-lg " />
       </div>
     </div>
   )
