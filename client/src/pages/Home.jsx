@@ -18,11 +18,8 @@ export default function Home() {
     <div>
       <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
         <h1 className="text-3xl font-bold lg:text-5xl">Welcome to Echo Ideas</h1>
-        <p className="text-gray-500 text-xs sm:text-sm">Here you'll find a variety of articles and tutorials on various topics. You will also be informed about the latest trends happening in the industry of your interest. </p>
+        <p className="text-gray-500 text-xs sm:text-sm">Here you&apos;ll find a variety of articles and tutorials on various topics. You will also be informed about the latest trends happening in the industry of your interest. </p>
       <Link to='/search' className="text-xs sm:text-sm text-teal-500 font-bold hover:underline">View all posts</Link>
-      </div>
-      <div className="p-3 bg-amber-100 dark:bg-slate-700">
-       <CallToAction />
       </div>
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
         {
@@ -40,6 +37,9 @@ export default function Home() {
             </div>
           )
         }
+      </div>
+      <div className="p-3 bg-amber-100 dark:bg-slate-700">
+       <CallToAction />
       </div>
     </div>
 
