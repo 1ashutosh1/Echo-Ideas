@@ -10,11 +10,14 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(comment.content);
   const { currentUser } = useSelector((state) => state.user);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     const getUser = async () => {
       try {
         // eslint-disable-next-line react/prop-types
-        const res = await fetch(`/api/user/${comment.userId}`);
+        const res = await fetch(`${backendUrl}/api/user/${comment.userId}`,{
+          credentials: "include",
+        });
         const data = await res.json();
         if (res.ok) {
           setUser(data);
@@ -33,14 +36,15 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
 
   const handleSave = async() => {
    try {
-     const res = await fetch(`/api/comment/editComment/${comment._id}`,{
+     const res = await fetch(`${backendUrl}/api/comment/editComment/${comment._id}`,{
       method: 'PUT',
       headers:{
         'Content-Type': 'application/json' 
       },
       body: JSON.stringify({
         content: editedContent
-      })
+      }),
+        credentials: "include",
      });
 
      if(res.ok){

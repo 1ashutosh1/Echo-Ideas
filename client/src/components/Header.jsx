@@ -13,12 +13,14 @@ const Header = () => {
   const { currentUser } = useSelector((state) => state.user);
   const {theme} = useSelector((state) => state.theme);
   const [searchTerm, setSearchTerm] = useState('');
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const location = useLocation();
   const navigate = useNavigate();
    
   useEffect(() => {
    const urlParams = new URLSearchParams(location.search);
    const searchTermFromUrl = urlParams.get('searchTerm');
+   
    if(searchTermFromUrl){
     setSearchTerm(searchTermFromUrl);
    }
@@ -26,8 +28,9 @@ const Header = () => {
 
   const handleSignout = async () => {
     try{
-      const res = await fetch('/api/user/signout',{
+      const res = await fetch(`${backendUrl}/api/user/signout`,{
         method: "POST",
+        credentials: "include",
       });
       const data = await res.json();
       if(!res.ok){

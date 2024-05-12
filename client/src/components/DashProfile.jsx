@@ -33,6 +33,7 @@ export default function DashProfile() {
   const [updateUserSuccess, setUpdateUserSuccess] = useState(null);
   const [updateUserError, setUpdateUserError] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const filePickerRef = useRef();
   const dispatch = useDispatch();
@@ -104,12 +105,13 @@ export default function DashProfile() {
 
     try {
       dispatch(updateStart());
-      const res = await fetch(`/api/user/update/${currentUser._id}`, {
+      const res = await fetch(`${backendUrl}/api/user/update/${currentUser._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -130,8 +132,9 @@ export default function DashProfile() {
     setShowModal(false);
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`,{
+      const res = await fetch(`${backendUrl}/api/user/delete/${currentUser._id}`,{
         method: 'DELETE',
+        credentials: "include",
       });
 
       const data = await res.json();
@@ -147,8 +150,9 @@ export default function DashProfile() {
 
   const handleSignout = async () => {
     try{
-      const res = await fetch('/api/user/signout',{
+      const res = await fetch(`${backendUrl}/api/user/signout`,{
         method: "POST",
+        credentials: "include",
       });
       const data = await res.json();
       if(!res.ok){

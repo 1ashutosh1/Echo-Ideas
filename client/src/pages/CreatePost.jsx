@@ -19,6 +19,7 @@ export default function CreatePost() {
   const [imageUploadError, setImageUploadError] = useState(null);
   const [formData, setFormData] = useState({});
   const [publishError, setPublishError] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
   const handleUploadImage = async () => {
     try {
@@ -61,12 +62,13 @@ export default function CreatePost() {
   const handleSubmit = async(e) => {
      e.preventDefault();
      try {
-        const res = await fetch('/api/post/create', {
+        const res = await fetch(`${backendUrl}/api/post/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(formData),
+          credentials: "include",
         });
 
         const data = await res.json();

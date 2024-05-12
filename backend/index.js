@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from 'cors';
 import userRoutes from "./routes/user.route.js";
 import authRoutes from "./routes/auth.route.js";
 import cookieParser from "cookie-parser";
@@ -11,15 +12,30 @@ const app = express();
 
 dotenv.config();
 mongoose
-  .connect(process.env.MONGOURL)
-  .then(() => {
-    console.log("MongoDB is connected");
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+.connect(process.env.MONGOURL)
+.then(() => {
+  console.log("MongoDB is connected");
+})
+.catch((err) => {
+  console.log(err);
+});
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: ['http://localhost:5173'],
+    credentials: true,
+    methods: ["GET", "POST", "DELETE", "PUT", "UPDATE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }));
+
+  // app.use((req, res, next) => {
+  //   res.setHeader("Access-Control-Allow-Origin", 'http://localhost:5173');
+  //   res.setHeader("Access-Control-Allow-Methods", "POST, GET");
+  //   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  //   next();
+  // });
+
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
@@ -37,6 +53,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(4000, () => {
-  console.log("Server is running on port 4000");
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

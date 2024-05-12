@@ -10,11 +10,14 @@ export default function DashUsers() {
   const [showMore, setshowMore] = useState(true);
   const [showModal, setshowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleShowMore = async () => {
     const startIndex = users.length;
     try {
-      const res = await fetch(`/api/user/getposts?startIndex=${startIndex}`);
+      const res = await fetch(`${backendUrl}/api/user/getposts?startIndex=${startIndex}`,{
+        credentials: "include",
+      });
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
@@ -30,7 +33,9 @@ export default function DashUsers() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res = await fetch(`/api/user/getusers`);
+        const res = await fetch(`${backendUrl}/api/user/getusers`,{
+          credentials: "include",
+        });
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
@@ -49,8 +54,9 @@ export default function DashUsers() {
 
   const handleDeleteUser = async () => {
     try {
-      const res = await fetch(`api/user/delete/${userIdToDelete}`,{
+      const res = await fetch(`${backendUrl}/api/user/delete/${userIdToDelete}`,{
         method: 'DELETE',
+        credentials: "include",
       });
       const data = await res.json();
       if(res.ok){

@@ -12,12 +12,15 @@ export default function PostPage() {
   const [error, setError] = useState(false);
   const [post, setPost] = useState(null);
   const [recentPosts, setRecentPosts] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/post/getposts?slug=${postSlug}`);
+        const res = await fetch(`${backendUrl}/api/post/getposts?slug=${postSlug}`,{
+          credentials: "include",
+        });
         const data = await res.json();
         if (!res.ok) {
           setError(true);
@@ -40,7 +43,9 @@ export default function PostPage() {
   useEffect(() => {
    try {
      const fetchRecentPosts = async() => {
-       const res = await fetch(`/api/post/getposts?limit=3`);
+       const res = await fetch(`${backendUrl}/api/post/getposts?limit=3`,{
+        credentials: "include",
+       });
        const data = await res.json();
        if(res.ok){
           setRecentPosts(data.posts);

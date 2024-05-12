@@ -22,12 +22,15 @@ export default function UpdatePost() {
   const [publishError, setPublishError] = useState(null);
   const {postId} = useParams();
   const navigate = useNavigate();
-  const {currentUser} = useSelector((state) => state.user)
+  const {currentUser} = useSelector((state) => state.user);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
    try {
     const fetchPost = async() => {
-      const res = await fetch(`/api/post/getposts?postId=${postId}`);
+      const res = await fetch(`${backendUrl}/api/post/getposts?postId=${postId}`,{
+        credentials: "include",
+      });
       const data = await res.json();
       if(!res.ok){
         console.log(data.message);
@@ -86,12 +89,13 @@ export default function UpdatePost() {
   const handleSubmit = async(e) => {
      e.preventDefault();
      try {
-        const res = await fetch(`/api/post/updatepost/${postId}/${currentUser._id}`, {
+        const res = await fetch(`${backendUrl}/api/post/updatepost/${postId}/${currentUser._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(formData)
+          body: JSON.stringify(formData),
+          credentials: "include",
         });
 
         const data = await res.json();

@@ -10,10 +10,12 @@ export default function DashSideBar() {
   const {currentUser} = useSelector(state => state.user);
   const dispatch = useDispatch();
   const [tab, setTab] = useState("");
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const handleSignout = async () => {
     try{
-      const res = await fetch('/api/user/signout',{
+      const res = await fetch(`${backendUrl}/api/user/signout`,{
         method: "POST",
+        credentials: "include",
       });
       const data = await res.json();
       if(!res.ok){
