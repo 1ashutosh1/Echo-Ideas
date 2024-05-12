@@ -10,7 +10,7 @@ export const updateUser = async (req, res, next) => {
     return next(errorHandler(403, "You are not allowed to update this user"));
   }
 
-  const { username, email, password } = req.body;
+  let { username, email, password } = req.body;
   if (password) {
     if (password.length < 6) {
       return next(
