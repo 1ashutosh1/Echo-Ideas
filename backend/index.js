@@ -21,7 +21,7 @@ mongoose
 });
 
 app.use(express.json());
-const frontendURL = process.env.frontendURL;
+const frontendURL = process.env.FRONTEND_URL;
 app.use(
   cors({
     origin: [frontendURL],
