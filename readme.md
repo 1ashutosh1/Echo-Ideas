@@ -1,4 +1,5 @@
 # Echo Ideas 📣💡
+**Note:** The server for this project is deployed on Render, which may take some time to fully load the website and fetch posts. Please be patient while the server initializes and retrieves the necessary data.
 
 Echo Ideas is a full-stack web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js) that allows users to view articles, comment on them, and like their favorite articles. The application also provides Google OAuth for seamless user authentication. Users can update their profile information including profile picture, username, and password. Additionally, it includes an admin dashboard where administrators can manage users, view comments and posts, create new posts, and access website statistics.
 
