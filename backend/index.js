@@ -39,6 +39,11 @@ app.use(
 
 app.use(cookieParser());
 
+// Test API to check if the server is running
+app.get('/test', (req, res) => {
+  res.status(200).json("Server is running perfectly!");
+});
+
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/post", postRoutes);
