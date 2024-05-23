@@ -17,13 +17,13 @@ import {
   deleteUserStart,
   deleteFailure,
   deleteSuccess,
-  signoutSuccess
+  signoutSuccess,
 } from "../redux/user/userSlice";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 export default function DashProfile() {
-  const { currentUser,error, loading } = useSelector((state) => state.user);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
   const [imageFile, setImageFile] = useState(null);
   const [imageFileUrl, setImageFileUrl] = useState(null);
   const [imageFileUploadProgress, setimageFileUploadProgress] = useState(null);
@@ -105,14 +105,17 @@ export default function DashProfile() {
 
     try {
       dispatch(updateStart());
-      const res = await fetch(`${backendUrl}/api/user/update/${currentUser._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${backendUrl}/api/user/update/${currentUser._id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
       if (!res.ok) {
@@ -132,35 +135,38 @@ export default function DashProfile() {
     setShowModal(false);
     try {
       dispatch(deleteUserStart());
-      const res = await fetch(`${backendUrl}/api/user/delete/${currentUser._id}`,{
-        method: 'DELETE',
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${backendUrl}/api/user/delete/${currentUser._id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
 
       const data = await res.json();
-      if(!res.ok){
+      if (!res.ok) {
         dispatch(deleteFailure(data.message));
-      } else{
+      } else {
         dispatch(deleteSuccess(data));
       }
     } catch (error) {
-      dispatch(deleteFailure(error.message))
+      dispatch(deleteFailure(error.message));
     }
   };
 
   const handleSignout = async () => {
-    try{
-      const res = await fetch(`${backendUrl}/api/user/signout`,{
+    try {
+      const res = await fetch(`${backendUrl}/api/user/signout`, {
         method: "POST",
         credentials: "include",
       });
       const data = await res.json();
-      if(!res.ok){
+      if (!res.ok) {
         console.log(data.message);
-      }else{
-        dispatch(signoutSuccess())
+      } else {
+        dispatch(signoutSuccess());
       }
-    } catch(error){
+    } catch (error) {
       console.log(error.message);
     }
   };
@@ -231,24 +237,27 @@ export default function DashProfile() {
           placeholder="password"
           onChange={handleChange}
         />
-        <Button type="submit" gradientDuoTone="purpleToBlue" outline disabled={loading || imageFileUploading}>
-          {loading ? 'Loading...' : 'Update'}
+        <Button
+          type="submit"
+          gradientDuoTone="purpleToBlue"
+          outline
+          disabled={loading || imageFileUploading}
+        >
+          {loading ? "Loading..." : "Update"}
         </Button>
-        { 
-          currentUser.isAdmin && (
-            <Link to={'/create-post'}>
-           <Button gradientDuoTone='purpleToPink' className="w-full">
-             Create a Post
-           </Button>
-            </Link>
-          )
-        }
+        <Link to={"/create-post"}>
+          <Button gradientDuoTone="purpleToPink" className="w-full">
+            Create a Post
+          </Button>
+        </Link>
       </form>
       <div className="text-red-500 flex justify-between mt-5">
         <span onClick={() => setShowModal(true)} className="cursor-pointer">
           Delete Account
         </span>
-        <span onClick={handleSignout} className="cursor-pointer">Sign Out</span>
+        <span onClick={handleSignout} className="cursor-pointer">
+          Sign Out
+        </span>
       </div>
       {updateUserSuccess && (
         <Alert color="success" className="mt-5">

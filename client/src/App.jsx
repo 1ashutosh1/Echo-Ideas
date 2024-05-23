@@ -18,7 +18,7 @@ import Features from "./pages/Features";
 const App = () => {
   return (
     <BrowserRouter>
-      <ScrollToTop/>
+      <ScrollToTop />
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -29,12 +29,12 @@ const App = () => {
         <Route element={<PrivateRoute />}>
           <Route path="/dashboard" element={<DashBoard />} />
         </Route>
+        <Route path="/create-post" element={<CreatePost />} />
         <Route element={<OnlyAdminPrivateRoute />}>
-          <Route path="/create-post" element={<CreatePost />} />
-          <Route path="/update-post/:postId" element={<UpdatePost />} />
+        <Route path="/update-post/:postId" element={<UpdatePost />} />
         </Route>
         <Route path="/features" element={<Features />} />
-        <Route path="/post/:postSlug" element={<PostPage/>} />
+        <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>
