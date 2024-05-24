@@ -14,7 +14,7 @@ export default function CallToAction() {
     <div className="flex flex-col sm:flex-row p-3 border border-teal-500 justify-center items-center rounded-tl-3xl rounded-br-3xl text-center gap-5">
       <div className="flex-1 justify-center flex flex-col pl-5">
         <h2 className="text-2xl">Request to Become an Admin!</h2>
-        <p className="text-gray-500 my-2">Becoming an admin unlocks many features like you can write your own posts, see the statistics about those posts, delete your posts and comments, etc. </p>
+        <p className="text-gray-500 my-2">Becoming an admin unlocks many features like you can see the statistics about posts, delete your posts and comments and even delete users who do not follow community guidelines </p>
         <Button gradientDuoTone='purpleToPink' onClick={handleClick} className="mt-3">Request</Button>
       </div>
       <div className="flex-1 flex p-7">

@@ -14,6 +14,7 @@ import PostPage from "./pages/PostPage";
 import ScrollToTop from "./components/ScrollToTop";
 import Search from "./pages/Search";
 import Features from "./pages/Features";
+import MyChatBot from "./components/MyChatBot";
 
 const App = () => {
   return (
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/post/:postSlug" element={<PostPage />} />
       </Routes>
       <Footer />
+      <MyChatBot />
     </BrowserRouter>
   );
 };
